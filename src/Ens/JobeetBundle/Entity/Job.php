@@ -407,7 +407,8 @@ class Job
     /**
      * Set created_at
      *
-     * @param \DateTime $createdAt
+     * @ORM\PrePersist
+     *
      * @return Job
      */
     public function setCreatedAt()
@@ -422,7 +423,7 @@ class Job
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -432,7 +433,8 @@ class Job
     /**
      * Set updated_at
      *
-     * @param \DateTime $updatedAt
+     * @ORM\PreUpdate
+     *
      * @return Job
      */
     public function setUpdatedAt()
@@ -473,20 +475,5 @@ class Job
     public function getCategory()
     {
         return $this->category;
-    }
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedAtValue()
-    {
-        // Add your code here
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedAtValue()
-    {
-        // Add your code here
     }
 }
