@@ -21,7 +21,7 @@ class JobController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('EnsJobeetBundle:Job')->findAll();
 
@@ -93,7 +93,7 @@ class JobController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('EnsJobeetBundle:Job')->find($id);
 
@@ -105,7 +105,8 @@ class JobController extends Controller
 
         return $this->render('EnsJobeetBundle:Job:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
