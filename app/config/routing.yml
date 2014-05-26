@@ -1,4 +1,8 @@
 ens_jobeet:
-    resource: @EnsJobeetBundle/Resources/config/routing.yml
+    resource: "@EnsJobeetBundle/Resources/config/routing.yml"
     prefix:   /
+
+EnsJobeetBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: EnsJobeetBundle:Default:index }
 
