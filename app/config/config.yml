@@ -1,3 +1,5 @@
+parameters:
+    max_jobs_on_homepage: 10
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
