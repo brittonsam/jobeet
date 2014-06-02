@@ -12,6 +12,22 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface
     {
         // ...
 
+        $job_sensio_labs = new Job();
+        $job_sensio_labs->setCategory($em->merge($this->getReference('category-programming')));
+        $job_sensio_labs->setType('full-time');
+        $job_sensio_labs->setCompany('Sensio Labs');
+        $job_sensio_labs->setLogo('sensio-labs.gif');
+        $job_sensio_labs->setUrl('http://www.sensiolabs.com/');
+        $job_sensio_labs->setPosition('Web Developer');
+        $job_sensio_labs->setLocation('Paris, France');
+        $job_sensio_labs->setDescription('You\'ve already developed websites with symfony and you want to work with Open-Source technologies. You have a minimum of 3 years experience in web development with PHP or Java and you wish to participate to development of Web 2.0 sites using the best frameworks available.');
+        $job_sensio_labs->setHowToApply('Send your resume to fabien.potencier [at] sensio.com');
+        $job_sensio_labs->setIsPublic(true);
+        $job_sensio_labs->setIsActivated(true);
+        $job_sensio_labs->setToken('job_sensio_labs');
+        $job_sensio_labs->setEmail('job@example.com');
+        $job_sensio_labs->setExpiresAt(new \DateTime('2012-10-10'));
+
         for($i = 100; $i <= 130; $i++)
         {
             $job = new Job();
@@ -28,7 +44,9 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface
             $job->setEmail('job@example.com');
 
 
+            $em->persist($job_sensio_labs);
             $em->persist($job);
+
         }
 
         $em->flush();

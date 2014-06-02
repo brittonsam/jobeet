@@ -1,6 +1,7 @@
 <?php
 
 namespace Ens\JobeetBundle\Utils;
+
 class Jobeet
 {
     static public function slugify($text)

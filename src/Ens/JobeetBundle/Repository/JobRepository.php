@@ -14,20 +14,39 @@ class JobRepository extends EntityRepository
 {
     public function getActiveJobs($id)
     {
-        $query = $this->createQueryBuilder('j')
-            ->where('j.id = :id')
+        $query = $this->createQueryBuilder('job')
+            ->join('job.category', 'category')
+            ->where('category.id = :id')
             ->setParameter('id', $id)
-            ->andWhere('j.expires_at > :date')
+            ->andWhere('job.expires_at > :date')
             ->setParameter('date', date('Y-m-d H:i:s', time()))
-            ->setMaxResults(1)
+            ->setMaxResults(10)
             ->getQuery();
 
         try {
-            $job = $query->getSingleResult();
+            $job = $query->getResult();
         } catch (\Doctrine\Orm\NoResultException $e) {
             $job = null;
         }
 
         return $job;
+    }
+
+    public function countActiveJobs($category_id = null)
+    {
+        $qb = $this->createQueryBuilder('j')
+            ->select('count(j.id)')
+            ->where('j.expires_at > :date')
+            ->setParameter('date', date('Y-m-d H:i:s', time()));
+
+        if($category_id)
+        {
+            $qb->andWhere('j.category = :category_id')
+                ->setParameter('category_id', $category_id);
+        }
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleScalarResult();
     }
 }
